@@ -1,0 +1,66 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {
+    "indent": [2, 2, { "SwitchCase": 1 }],
+    "semi": [1, "never"],
+    "quotes": [2, "single", { "allowTemplateLiterals": true }],
+    "no-empty": 2,
+    "no-dupe-keys": 2,
+    "no-duplicate-case": 2,
+    "no-duplicate-imports": 2,
+    "no-extra-parens": 2,
+    "no-var": 2,
+    "no-multi-spaces": 2,
+    "no-self-assign": 2,
+    "no-mixed-spaces-and-tabs": 2,
+    "no-tabs": 2,
+    "no-trailing-spaces": 2,
+    "no-nested-ternary": 2,
+    "wrap-regex": 2,
+    "one-var": [2, "never"],
+    "operator-linebreak": [2, "before"],
+    "comma-spacing": [2, { "before": false, "after": true }],
+    "comma-style": [2, "last"],
+    "comma-dangle": [2, {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "ignore"
+    }],
+    "func-style": [2, "expression", { "allowArrowFunctions": true }],
+    "jsx-quotes": [2, "prefer-single"],
+    "key-spacing": [2, {
+      "beforeColon": false,
+      "afterColon": true
+    }],
+    "keyword-spacing": [2, {
+      "before": true,
+      "after": true
+    }],
+    "max-len": [2, {
+      "code": 100,
+      "tabWidth": 2
+    }],
+    "no-multiple-empty-lines": [2, {
+      "max": 1
+    }],
+    "arrow-body-style": [2, "as-needed"],
+    "arrow-spacing": [2, {
+      "before": true,
+      "after": true
+    }],
+    "constructor-super": 2,
+    "prefer-const": 2,
+    "rest-spread-spacing": [2, "never"]
+  }
+}
