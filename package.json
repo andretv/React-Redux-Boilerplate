@@ -2,9 +2,11 @@
   "name": "react-redux-boilerplate",
   "version": "0.0.0",
   "description": "A React Redux Boilerplate",
-  "main": "main.js",
+  "main": "serve.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "node .",
+    "dev": "NODE_ENV=development webpack-dev-server --mode development --color --progress",
+    "build": "rm -rf ./dist && NODE_ENV=production webpack --mode production"
   },
   "author": "Andre Vaccari <andrevaccari95@gmail.com>",
   "license": "MIT",

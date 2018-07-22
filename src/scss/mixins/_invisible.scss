@@ -1,0 +1,5 @@
+@mixin invisible {
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}

@@ -1,0 +1,5 @@
+@mixin transition($property: all, $duration: 0.4s, $ease: ease-in-out) {
+  transform: translateZ(0);
+  transition: $property $duration $ease;
+  @include prefix(transition, $property $duration $ease, (moz, webkit, o));
+}

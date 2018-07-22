@@ -1,0 +1,10 @@
+@import 'mixins/index';
+@import 'functions/index';
+@import 'variables/index';
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}

@@ -1,0 +1,15 @@
+@mixin animation($animation, $duration, $delay: 0, $iteration-count: infinite, $timing: ease-in-out) {
+  transform: translateZ(0);
+  animation-delay: $delay;
+  animation-duration: $duration;
+  animation-name: $animation;
+  animation-fill-mode: forwards;
+  animation-timing-function: $timing;
+  animation-iteration-count: $iteration-count;
+  @include prefix(animation-delay, $delay, (moz, webkit, o));
+  @include prefix(animation-duration, $duration, (moz, webkit, o));
+  @include prefix(animation-name, $animation, (moz, webkit, o));
+  @include prefix(animation-fill-mode, forwards, (moz, webkit, o));
+  @include prefix(animation-timing-function, $timing, (moz, webkit, o));
+  @include prefix(animation-iteration-count, $iteration-count, (moz, webkit, o));
+}
