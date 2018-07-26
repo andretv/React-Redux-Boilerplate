@@ -3,9 +3,13 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const devMode = process.env.NODE_ENV === 'development'
 
+const publicUrl = devMode
+  ? ''
+  : 'http://localhost:1234';
 const generateHtml = new HtmlWebpackPlugin({
   filename: 'index.html',
   template: './public/index.html',
@@ -56,6 +60,37 @@ const config = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
       BASE_URL: JSON.stringify('http://localhost:3000'),
+    }),
+    new SWPrecacheWebpackPlugin({
+
+      /**
+       * By default, a cache-busting query parameter is appended to requests
+       * used to populate the caches, to ensure the responses are fresh.
+       * If a URL is already hashed by Webpack, then there is no concern
+       * about it being stale, and the cache-busting can be skipped.
+       */
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'service-worker.js',
+      logger(message) {
+        if (message.indexOf('Total precache size is') === 0) {
+          /**
+           * This message occurs for every build and is a bit too noisy.
+           */
+          return;
+        }
+        if (message.indexOf('Skipping static resource') === 0) {
+          /**
+           * This message obscures real errors so we ignore it.
+           * https://github.com/facebookincubator/create-react-app/issues/2612
+           */
+          return;
+        }
+        console.log(message);
+      },
+      minify: true,
+      navigateFallback: publicUrl + '/index.html',
+      navigateFallbackWhitelist: [/^(?!\/__).*/],
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
   ],
   module: {

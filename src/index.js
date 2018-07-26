@@ -5,6 +5,7 @@ import Loadable from 'react-loadable'
 
 import 'scss/global.scss'
 import 'scss/normalize.scss'
+import registerServiceWorker from './registerServiceWorker';
 
 const Root = Loadable({
   loader: () => import('src/root/root'),
@@ -15,3 +16,4 @@ ReactDOM.render(
   <Root />,
   document.getElementById('app')
 )
+registerServiceWorker();
