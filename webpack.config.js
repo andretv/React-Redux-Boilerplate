@@ -1,26 +1,56 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const devMode = process.env.NODE_ENV === 'development'
+/**
+ * @type {boolean}
+ * @description Checks if process is running in development mode.
+ */
+const devMode = process.env.NODE_ENV === 'development';
 
+/**
+ * @type {string}
+ * @description Public Url.
+ */
 const publicUrl = devMode
   ? ''
+
+  /**
+   * Needs to be changed to your public URL.
+   */
   : 'http://localhost:1234';
+
+/**
+ * @type {HtmlWebpackPlugin}
+ * @description Webpack plugin configured to generate html index template.
+ */
 const generateHtml = new HtmlWebpackPlugin({
   filename: 'index.html',
   template: './public/index.html',
   chunksSortMode: 'none',
-})
+});
 
-const devtool = devMode ? 'source-map' : undefined
+/**
+ * @type {?string}
+ * @description Describe what kind of devtools webpack should use.
+ */
+const devtool = devMode ? 'source-map' : undefined;
 
+/**
+ * @type {object}
+ * @description Webpack configuration object.
+ */
 const config = {
   devtool,
+
+  /**
+   * @type {object}
+   * @description webpack-dev-server configuration.
+   */
   devServer: {
     historyApiFallback: true,
     host: '0.0.0.0',
@@ -29,14 +59,29 @@ const config = {
     port: 1234,
     hot: true,
   },
+
+  /**
+   * @type {object}
+   * @description Webpack output path, bundle and chunks name configuration.
+   */
   output: {
     filename: 'bundle.[hash:8].js',
     chunkFilename: '[name].[chunkhash:8].chunk.js',
     path: path.resolve(__dirname, 'dist'),
   },
+
+  /**
+   * @type {object}
+   * @description Webpack resolve configuration.
+   */
   resolve: {
     modules: [path.resolve(__dirname), 'node_modules'],
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx', '.json'],
+
+    /**
+     * @type {object}
+     * @description Alias to easily import files.
+     */
     alias: {
       src: path.resolve(__dirname, 'src/'),
       tools: path.resolve(__dirname, 'src/tools'),
@@ -56,12 +101,21 @@ const config = {
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
+
+    /**
+     * @description Here is where is defined all application constants.
+     */
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        PUBLIC_URL: JSON.stringify(publicUrl),
       },
       BASE_URL: JSON.stringify('http://localhost:3000'),
     }),
+
+    /**
+     * @description Detects circular dependencies.
+     */
     new CircularDependencyPlugin({
       exclude: /a\.js|node_modules/,
       failOnError: true,
@@ -90,6 +144,11 @@ const config = {
         console.log('end detecting webpack modules cycles');
       },
     }),
+
+    /**
+     * @description Generate a service worker script that will precache,
+     * and keep up to date, the HTML & assets that are part of the Webpack build.
+     */
     new SWPrecacheWebpackPlugin({
 
       /**
@@ -122,8 +181,26 @@ const config = {
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
   ],
+
+  /**
+   * @type {object}
+   * @description All webpack module configuration.
+   */
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.(js|jsx)$/,
+        include: path.resolve(__dirname, 'src/'),
+        exclude: /node_modules/,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            emitWarning: true,
+            failOnError: true,
+          },
+        },
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -216,6 +293,6 @@ const config = {
       },
     ],
   },
-}
+};
 
-module.exports = config
+module.exports = config;

@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
     return (
       <div>Login</div>
-    )
+    );
   }
 }
-export default Login
+export default Login;

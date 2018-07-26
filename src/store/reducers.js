@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-// Reducers
-import auth from 'modules/auth/reducers'
+/**
+ * Modules Reducers.
+ */
+import auth from 'modules/auth/reducers';
 
 export default combineReducers({
   auth,
-})
+});

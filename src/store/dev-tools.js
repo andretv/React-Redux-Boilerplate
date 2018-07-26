@@ -1,13 +1,19 @@
-import React from 'react'
-import { createDevTools } from 'redux-devtools'
+import React from 'react';
+import { createDevTools } from 'redux-devtools';
 
-// Monitors
-import MultipleMonitors from 'redux-devtools-multiple-monitors'
-import LogMonitor from 'redux-devtools-log-monitor'
-import DockMonitor from 'redux-devtools-dock-monitor'
-import Dispatcher from 'redux-devtools-dispatch'
-import SliderMonitor from 'redux-slider-monitor'
+/**
+ * Monitors.
+ */
+import MultipleMonitors from 'redux-devtools-multiple-monitors';
+import LogMonitor from 'redux-devtools-log-monitor';
+import DockMonitor from 'redux-devtools-dock-monitor';
+import Dispatcher from 'redux-devtools-dispatch';
+import SliderMonitor from 'redux-slider-monitor';
 
+/**
+ * @tutorial https://github.com/reduxjs/redux-devtools
+ * @description Redux DevTools monitors configuration.
+ */
 const DevTools = createDevTools(
   <DockMonitor
     toggleVisibilityKey='ctrl-h'
@@ -22,6 +28,6 @@ const DevTools = createDevTools(
     </MultipleMonitors>
     <SliderMonitor />
   </DockMonitor>
-)
+);
 
-export default DevTools
+export default DevTools;
