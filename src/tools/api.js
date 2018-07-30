@@ -11,6 +11,7 @@ import { setToken } from 'modules/auth/actions/token';
  * @description Axios main api instance.
  */
 const instance = axios.create({
+  /* eslint no-undef: 0 */
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -21,8 +22,7 @@ const instance = axios.create({
  * Intercept every api response checking if there's an authorization
  * token and sets it to the store.
  */
-instance.interceptors.response.use(response => {
-
+instance.interceptors.response.use((response) => {
   if (response.headers.authorization) {
     store.dispatch(setToken(response.headers.authorization));
   }

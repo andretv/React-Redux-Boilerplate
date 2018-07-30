@@ -1,10 +1,10 @@
-import login from './login';
 import { combineReducers } from 'redux';
+import login from './login';
 
 /**
  * Constants
  */
-import { SET_TOKEN } from './../actions/token';
+import { SET_TOKEN } from '../actions/token';
 
 /**
  * @type {string}

@@ -3,8 +3,19 @@ import React from 'react';
 
 import Loadable from 'react-loadable';
 
+/**
+ * Components.
+ */
+import Loading from 'components/loading';
+
+/**
+ * Service Worker.
+ */
 import registerServiceWorker from './registerServiceWorker';
 
+/**
+ * Global styles and normalizeCSS.
+ */
 import 'scss/global.scss';
 import 'scss/normalize.scss';
 
@@ -13,7 +24,7 @@ import 'scss/normalize.scss';
  */
 const Root = Loadable({
   loader: () => import('src/root/root'),
-  loading: () => <div>Carregando...</div>,
+  loading: () => <Loading />,
 });
 
 /**

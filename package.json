@@ -4,13 +4,16 @@
   "description": "A React Redux Boilerplate",
   "main": "serve.js",
   "scripts": {
+    "eslint": "./node_modules/.bin/eslint",
     "serve": "node .",
     "dev": "NODE_ENV=development webpack-dev-server --mode development --color --progress",
-    "build": "rm -rf ./dist && NODE_ENV=production webpack --mode production"
+    "build": "rm -rf ./dist && NODE_ENV=production webpack --mode production",
+    "lint": "eslint ./src"
   },
   "author": "Andre Vaccari <andrevaccari95@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "autoprefixer": "^9.0.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^4.3.0",
@@ -38,8 +41,12 @@
     "babel-preset-stage-0": "^6.24.1",
     "circular-dependency-plugin": "^5.0.2",
     "css-loader": "^0.28.11",
-    "eslint": "^5.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
     "eslint-loader": "^2.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",

@@ -30,8 +30,7 @@ import DevTools from './dev-tools';
  * @description Configures redux store with redux persist,
  * and adds HotModuleReolad support.
  */
-const configStore = initialState => {
-
+const configStore = (initialState) => {
   /**
    * @description Browser history.
    */
@@ -66,7 +65,7 @@ const configStore = initialState => {
       routerMiddleware(history),
       thunk,
     ),
-    DevTools.instrument()
+    DevTools.instrument(),
   );
 
   /**
@@ -76,6 +75,7 @@ const configStore = initialState => {
     connectRouter(history)(persistedReducer),
     initialState,
     enhancer,
+    /* eslint no-underscore-dangle: 0 */
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   );
 
@@ -85,18 +85,17 @@ const configStore = initialState => {
   const persistor = persistStore(reduxStore);
 
   if (module.hot) {
-
     /**
      * Enable Webpack hot module replacement for reducers.
      */
     module.hot.accept(() => {
-
       /**
        * We need to require for hot reloading to work properly.
        */
+      /* eslint global-require: 0 */
       const nextRootReducer = require('./reducers');
       reduxStore.replaceReducer(
-        persistReducer(persistConfig, nextRootReducer)
+        persistReducer(rootPersistConfig, nextRootReducer),
       );
     });
   }

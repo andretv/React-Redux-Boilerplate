@@ -11,32 +11,38 @@ import { PersistGate } from 'redux-persist/integration/react';
 import configStore from 'store/config';
 
 /**
+ * Components
+ */
+import Loading from 'components/loading';
+
+/**
  * Screens.
  */
 const App = Loadable({
   loader: () => import('modules/app'),
-  loading: () => <div>Carregando...</div>,
+  loading: () => <Loading />,
 });
 const Login = Loadable({
   loader: () => import('modules/auth/screens/login'),
-  loading: () => <div>Carregando...</div>,
+  loading: () => <Loading />,
 });
 
 const { reduxStore, persistor, history } = configStore();
 
 export const store = reduxStore;
 
-const Root = () =>
+const Root = () => (
   <Provider store={reduxStore}>
     <PersistGate loading={null} persistor={persistor}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route exact path='/' component={Login} />
-          <Route path='/app' component={App} />
-          <Redirect to='/' />
+          <Route exact path="/" component={Login} />
+          <Route path="/app" component={App} />
+          <Redirect to="/" />
         </Switch>
       </ConnectedRouter>
     </PersistGate>
-  </Provider >;
+  </Provider>
+);
 
 export default Root;

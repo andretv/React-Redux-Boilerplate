@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: 0 */
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -176,7 +177,7 @@ const config = {
         console.log(message);
       },
       minify: true,
-      navigateFallback: publicUrl + '/index.html',
+      navigateFallback: `${publicUrl}/index.html`,
       navigateFallbackWhitelist: [/^(?!\/__).*/],
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
