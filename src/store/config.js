@@ -12,6 +12,14 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
+/**
+ * Packages used to connect React Router to Redux.
+ * More info:
+ * Connected React Router @tutorial https://github.com/supasate/connected-react-router
+ */
+import { createBrowserHistory } from 'history';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+
 import reducers from './reducers';
 import DevTools from './dev-tools';
 
@@ -23,6 +31,11 @@ import DevTools from './dev-tools';
  * and adds HotModuleReolad support.
  */
 const configStore = initialState => {
+
+  /**
+   * @description Browser history.
+   */
+  const history = createBrowserHistory();
 
   /**
    * @typedef  {object}
@@ -50,6 +63,7 @@ const configStore = initialState => {
    */
   const enhancer = compose(
     applyMiddleware(
+      routerMiddleware(history),
       thunk,
     ),
     DevTools.instrument()
@@ -59,7 +73,7 @@ const configStore = initialState => {
    * @description Redux store.
    */
   const reduxStore = createStore(
-    persistedReducer,
+    connectRouter(history)(persistedReducer),
     initialState,
     enhancer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
@@ -87,7 +101,7 @@ const configStore = initialState => {
     });
   }
 
-  return { reduxStore, persistor };
+  return { reduxStore, persistor, history };
 };
 
 export default configStore;
