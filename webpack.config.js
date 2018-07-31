@@ -62,6 +62,14 @@ const config = {
   },
 
   /**
+   * @type {string}
+   * @description Application entry point.
+   */
+  entry: {
+    main: './src/index.jsx',
+  },
+
+  /**
    * @type {object}
    * @description Webpack output path, bundle and chunks name configuration.
    */
@@ -232,6 +240,17 @@ const config = {
           'postcss-loader',
           'sass-loader',
         ],
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+            removeComments: false,
+            collapseWhitespace: false,
+          },
+        },
       },
       {
         test: /\.woff\d?(\?.+)?$/,
