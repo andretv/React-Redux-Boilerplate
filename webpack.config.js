@@ -233,12 +233,20 @@ const config = {
         },
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.(sa|sc)ss$/,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
         ],
       },
       {
