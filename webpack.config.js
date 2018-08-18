@@ -220,6 +220,7 @@ const config = {
             presets: ['env', 'react', 'stage-0'],
             plugins: [
               'transform-runtime',
+              'transform-class-properties',
             ],
             env: {
               development: {
