@@ -23,7 +23,7 @@ import 'scss/normalize.scss';
  * @description Root of the application.
  */
 const Root = Loadable({
-  loader: () => import('src/root/root'),
+  loader: () => import('src/root'),
   loading: () => <Loading />,
 });
 

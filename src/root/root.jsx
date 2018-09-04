@@ -46,7 +46,10 @@ const Root = () => (
           <Redirect to="/" />
         </Switch>
       </ConnectedRouter>
-      <DevTools />
+      {
+        process.env.NODE_ENV === 'development'
+        && <DevTools />
+      }
     </PersistGate>
   </Provider>
 );
