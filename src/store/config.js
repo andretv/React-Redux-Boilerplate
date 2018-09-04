@@ -11,6 +11,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
+import freeze from 'redux-freeze';
 
 /**
  * Packages used to connect React Router to Redux.
@@ -58,12 +59,23 @@ const configStore = (initialState) => {
   const persistedReducer = persistReducer(rootPersistConfig, reducers);
 
   /**
+   * @description Redux middlewares.
+   */
+  const middlewares = [
+    routerMiddleware(history),
+    thunk,
+  ];
+
+  if (process.env.NODE_ENV === 'development') {
+    middlewares.push(freeze);
+  }
+
+  /**
    * @description Store enhancer used to apply middlewares and devtools.
    */
   const enhancer = compose(
     applyMiddleware(
-      routerMiddleware(history),
-      thunk,
+      ...middlewares,
     ),
     DevTools.instrument(),
   );

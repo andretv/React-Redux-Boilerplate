@@ -60,6 +60,7 @@
     "redux-devtools-dock-monitor": "^1.1.3",
     "redux-devtools-log-monitor": "^1.4.0",
     "redux-devtools-multiple-monitors": "^1.0.1",
+    "redux-freeze": "^0.1.5",
     "redux-slider-monitor": "^2.0.0-1",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
