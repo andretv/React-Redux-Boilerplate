@@ -24,11 +24,11 @@ import Loading from 'components/loading';
  * Screens.
  */
 const App = Loadable({
-  loader: () => import('modules/app/index'),
+  loader: () => import('modules/app'),
   loading: () => <Loading />,
 });
-const Login = Loadable({
-  loader: () => import('modules/auth/screens/login'),
+const Auth = Loadable({
+  loader: () => import('modules/auth'),
   loading: () => <Loading />,
 });
 
@@ -41,9 +41,9 @@ const Root = () => (
     <PersistGate loading={null} persistor={persistor}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route path="/auth" component={Auth} />
           <Route path="/app" component={App} />
-          <Redirect to="/" />
+          <Redirect to="/auth" />
         </Switch>
       </ConnectedRouter>
       {
