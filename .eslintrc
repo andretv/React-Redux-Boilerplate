@@ -5,7 +5,7 @@
     "browser": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2018,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true,
@@ -15,11 +15,72 @@
   },
   "rules": {
     "no-console": "off",
-    "indent": [2, 2, { "SwitchCase": 1 }],
     "import/no-unresolved": 0,
-    "import/no-extraneous-dependencies": 0,
-    "react/forbid-prop-types": [2, {
-      "forbid": []
-    }]
+    "react/forbid-prop-types": [
+      2,
+      {
+        "forbid": []
+      }
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "ignoredNodes": [
+          "JSXElement",
+          "JSXElement > *",
+          "JSXAttribute",
+          "JSXIdentifier",
+          "JSXNamespacedName",
+          "JSXMemberExpression",
+          "JSXSpreadAttribute",
+          "JSXExpressionContainer",
+          "JSXOpeningElement",
+          "JSXClosingElement",
+          "JSXText",
+          "JSXEmptyExpression",
+          "JSXSpreadChild"
+        ]
+      }
+    ],
+    "react/jsx-indent": [
+      "disabled"
+    ],
+    "react/jsx-indent-props": [
+      "enabled",
+      2
+    ],
+    "no-unused-vars": "warn",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-for": "off",
+    "padded-blocks": [
+      "error",
+      {
+        "classes": "always"
+      }
+    ],
+    "react/prefer-stateless-function": "warn",
+    "max-len": [
+      0
+    ],
+    "no-underscore-dangle": "off",
+    "react/no-find-dom-node": "off",
+    "no-plusplus": "off",
+    "react/no-array-index-key": "off",
+    "no-param-reassign": 0,
+    "react/prop-types": [
+      1,
+      {
+        "skipUndeclared": true
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ]
   }
 }
