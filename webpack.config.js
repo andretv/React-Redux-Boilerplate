@@ -1,6 +1,7 @@
 /* eslint no-unused-vars: 0 */
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -112,14 +113,20 @@ const config = {
     }),
 
     /**
-     * @description Here is where is defined all application constants.
+     *
      */
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        PUBLIC_URL: JSON.stringify(publicUrl),
-      },
-      BASE_URL: JSON.stringify('http://localhost:3000'),
+    new Dotenv({
+      path: './.env',
+
+      /**
+       * @description Load '.env.example' to verify the '.env' variables are all set.
+       */
+      safe: true,
+
+      /**
+       * @description Load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+       */
+      systemvars: true,
     }),
 
     /**
@@ -185,7 +192,7 @@ const config = {
         console.log(message);
       },
       minify: true,
-      navigateFallback: `${publicUrl}/index.html`,
+      navigateFallback: `${process.env.PUBLIC_URL}/index.html`,
       navigateFallbackWhitelist: [/^(?!\/__).*/],
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
