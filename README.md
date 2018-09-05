@@ -14,6 +14,7 @@
 - [Features](#features)
 - [Quick start](#quick-start)
 - [Scripts](#scripts)
+- [Environment Variables](#environment-variables)
 - [Project Structure](#project-structure)
 - [Patterns](#patterns)
 - [License](#license)
@@ -32,9 +33,12 @@ All features are pre-configured and ready to use.
 * :construction: [**Redux DevTools**](https://redux.js.org/) :construction: - Helps debuging redux state.
 * :hourglass_flowing_sand: [**Redux Thunk**](https://github.com/reduxjs/redux-thunk) :hourglass_flowing_sand: - Responsible for dispatching redux async actions.
 * :floppy_disk: [**Redux Persist**](https://github.com/rt2zz/redux-persist) :floppy_disk: - Persist and rehydrate a redux store.
+* :icecream: [**Redux Freeze**](https://github.com/buunguyen/redux-freeze) :icecream: - Prevents store mutation.
 * :briefcase: [**Service Worker**](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) :briefcase: - Caches bundle and all chunks.
 * :package: [**Webpack**](https://webpack.js.org/) :package: - Module bundler.
 * :wrench: [**Babel**](https://babeljs.io/) :wrench: - JavaScript compiler.
+* :star: [**SASS**](https://sass-lang.com/) :star: - SASS syntax support.
+* :cop: [**NormalizeCSS**](https://necolas.github.io/normalize.css/) :cop: - Makes browsers render all elements more consistently.
 * :star2: [**PostCSS**](https://github.com/postcss/postcss) :star2: - Tool for transforming styles with JS plugins.
 * :eyeglasses: [**Airbnb ESLint**](https://github.com/airbnb/javascript/tree/master/react) :eyeglasses: - Linter!
 <br />
@@ -89,6 +93,20 @@ npm run serve
 **Lint**
 ```bash
 npm run lint
+```
+
+<a name="env"></a>
+## Environment Variables ##
+
+It's is important to duplicate `.env.example` and rename it to `.env`. There is two properties that are required by default for the boilerplate work properly: `PUBLIC_URL` and `API_URL`.
+
+Can be in your interests to create more than one `.env` file. To automate the usage of this files, simply go to `webpack.config.js` and find the `Dotenv` plugin. Inside its options change the path logic.
+
+*Exemple:*
+```javascript
+...
+path: process.env.NODE_ENV === 'production' ? './.env.prod' : './.env',
+...
 ```
 
 <a name="project-structure"></a>
