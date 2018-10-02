@@ -31,7 +31,7 @@ import DevTools from './dev-tools';
  * @description Configures redux store with redux persist,
  * and adds HotModuleReolad support.
  */
-const configStore = (initialState) => {
+const configStore = (initialState, api) => {
   /**
    * @description Browser history.
    */
@@ -63,7 +63,7 @@ const configStore = (initialState) => {
    */
   const middlewares = [
     routerMiddleware(history),
-    thunk,
+    thunk.withExtraArgument(api),
   ];
 
   if (process.env.NODE_ENV === 'development') {

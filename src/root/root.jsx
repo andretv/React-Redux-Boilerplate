@@ -6,6 +6,11 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
 /**
+ * Api and Api interceptors.
+ */
+import { api, applyApiInterceptors } from 'tools/api';
+
+/**
  * Store config.
  */
 import configStore from 'store/config';
@@ -32,9 +37,14 @@ const Auth = Loadable({
   loading: () => <Loading />,
 });
 
-const { reduxStore, persistor, history } = configStore();
+const { reduxStore, persistor, history } = configStore(undefined, api);
 
 export const store = reduxStore;
+
+/**
+ * Apply API interceptors.
+ */
+applyApiInterceptors(store);
 
 const Root = () => (
   <Provider store={reduxStore}>
