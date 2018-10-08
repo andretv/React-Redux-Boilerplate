@@ -246,7 +246,14 @@ const config = {
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [
+                path.resolve(__dirname, 'src', 'scss'),
+              ],
+            },
+          },
         ],
       },
       {
