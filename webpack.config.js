@@ -15,18 +15,6 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const devMode = process.env.NODE_ENV === 'development';
 
 /**
- * @type {string}
- * @description Public Url.
- */
-const publicUrl = devMode
-  ? ''
-
-  /**
-   * Needs to be changed to your public URL.
-   */
-  : 'http://localhost:1234';
-
-/**
  * @type {HtmlWebpackPlugin}
  * @description Webpack plugin configured to generate html index template.
  */
@@ -60,6 +48,7 @@ const config = {
     overlay: true,
     port: 1234,
     hot: true,
+    contentBase: path.resolve(__dirname, 'public'),
   },
 
   /**
@@ -251,6 +240,7 @@ const config = {
             options: {
               includePaths: [
                 path.resolve(__dirname, 'src', 'scss'),
+                path.resolve(__dirname, 'public'),
               ],
             },
           },
