@@ -8,7 +8,8 @@
     "serve": "node .",
     "dev": "NODE_ENV=development webpack-dev-server --mode development --color --progress",
     "build": "rm -rf ./dist && NODE_ENV=production webpack --mode production",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "start": "yarn run dev"
   },
   "author": "Andre Vaccari <andrevaccari95@gmail.com>",
   "license": "MIT",
